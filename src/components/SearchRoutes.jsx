@@ -11,7 +11,6 @@ const SearchRoutes = () => {
             to="/searchroutes/sajharoutes"
           >
             <button
-
               className='bg-tertiary rounded-[20px] py-5 px-12 min-h-[280px] min-w-[280px] flex justify-evenly items-center flex-col text-[24px] font-semibold hover:bg-black-100'>
               Sajha Yatayat
             </button>

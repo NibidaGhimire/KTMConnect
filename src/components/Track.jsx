@@ -1,72 +1,123 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+// ApL9gk0lzPyXzgDct5B1kxrlkJIpkGBvFRaDYE2gVL3LNehOicd0_367zCh8WZZk
 
-const Track = () => {
-  const [map, setMap] = useState(null);
 
+// import React, { useState, useEffect } from 'react';
+// import axios from 'axios';
+
+// const Track = () => {
+//   const [map, setMap] = useState(null);
+//   const [currentLocation, setCurrentLocation] = useState(null);
+
+//   useEffect(() => {
+//     const bingMapScript = document.createElement('script');
+//     bingMapScript.src = 'https://www.bing.com/api/maps/mapcontrol?key=ApL9gk0lzPyXzgDct5B1kxrlkJIpkGBvFRaDYE2gVL3LNehOicd0_367zCh8WZZk&callback=initMap';
+//     window.document.body.appendChild(bingMapScript);
+//     window.initMap = () => {
+//       const newMap = new Microsoft.Maps.Map(document.getElementById('map'), {
+//         center: new Microsoft.Maps.Location(0, 0),
+//         zoom: 32,
+//       });
+//       setMap(newMap);
+//     };
+//   }, []);
+
+//   useEffect(() => {
+//     const fetchFakeBusLocation = async () => {
+//       try {
+//         const response = await axios.get('http://localhost:3000/fake-bus-location');
+//         if (response && response.data) {
+//           const { latitude, longitude } = response.data;
+//           const newLocation = new Microsoft.Maps.Location(parseFloat(latitude), parseFloat(longitude));
+
+//           if (!currentLocation || Microsoft.Maps.SpatialMath.getDistanceTo(currentLocation, newLocation) < 1000) {
+//             updateMap(newLocation);
+//             setCurrentLocation(newLocation);
+//           }
+//         } else {
+//           console.error('Invalid response from server:', response);
+//         }
+//       } catch (error) {
+//         console.error('Error fetching fake bus location:', error.message);
+//       }
+//     };
+
+//     const updateMap = (location) => {
+//       if (!map) return;
+
+//       const pin = new Microsoft.Maps.Pushpin(location, {
+//         title: 'Bus Location',
+//       });
+
+//       if (map.entities.getLength() > 0) {
+//         map.entities.clear();
+//       }
+
+//       map.entities.push(pin);
+//       map.setView({ center: location, zoom: 12 });
+//     };
+
+//     const interval = setInterval(fetchFakeBusLocation, 5000);
+
+//     return () => clearInterval(interval);
+//   }, [map, currentLocation]);
+
+//   return (
+//     <div id='map' className='w-full h-screen' />
+//   );
+// };
+
+// export default Track;
+
+
+
+
+
+
+import React, { useEffect } from 'react';
+
+const MapComponent = () => {
   useEffect(() => {
-    const fetchFakeBusLocation = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:3000/fake-bus-location"
-        );
-        if (response && response.data) {
-          const { latitude, longitude } = response.data;
-          updateMap(parseFloat(latitude), parseFloat(longitude));
-        } else {
-          console.error("Invalid response from server:", response);
-        }
-      } catch (error) {
-        console.error(
-          "Error fetching fake bus location:",
-          error.response ? error.response.data : error.message
-        );
-      }
+    const loadMap = () => {
+      const script = document.createElement('script');
+      script.type = 'text/javascript';
+      script.async = true;
+      script.defer = true;
+      script.src = `https://www.bing.com/api/maps/mapcontrol?key=ApL9gk0lzPyXzgDct5B1kxrlkJIpkGBvFRaDYE2gVL3LNehOicd0_367zCh8WZZk&callback=initMap`;
+      document.body.appendChild(script);
     };
 
-    const updateMap = (latitude, longitude) => {
-      if (!map) return;
 
-      const newLocation = new Microsoft.Maps.Location(latitude, longitude);
-
-      const pin = new Microsoft.Maps.Pushpin(newLocation, {
-        title: "Bus Location",
+    window.initMap = () => {
+      const map = new window.Microsoft.Maps.Map(document.getElementById('bingMap'), {
+        credentials: "ApL9gk0lzPyXzgDct5B1kxrlkJIpkGBvFRaDYE2gVL3LNehOicd0_367zCh8WZZk",
       });
 
-      if (map.entities.getLength() > 0) {
-        map.entities.clear();
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+      } else {
+        alert('Geolocation is not supported by this browser.');
       }
 
-      map.entities.push(pin);
-      map.setView({ center: newLocation, zoom: 12 });
+      function showPosition(position) {
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+
+        const location = new window.Microsoft.Maps.Location(latitude, longitude);
+        map.setView({ center: location, zoom: 20 });
+
+        const pin = new window.Microsoft.Maps.Pushpin(location,{
+          title: "bus",
+        });
+        map.entities.push(pin);
+      }
     };
 
-    const interval = setInterval(fetchFakeBusLocation, 5000);
+    loadMap();
+  }, []);
 
-    return () => clearInterval(interval);
-  }, [map]);
-
-  const mapRef = React.useRef();
-
-  useEffect(() => {
-    if (!map) {
-      const bingMapScript = document.createElement("script");
-      bingMapScript.src =
-        "https://www.bing.com/api/maps/mapcontrol?jsonp=initMap&key=ApL9gk0lzPyXzgDct5B1kxrlkJIpkGBvFRaDYE2gVL3LNehOicd0_367zCh8WZZk&callback=initMap";
-      window.document.body.appendChild(bingMapScript);
-      window.initMap = () => {
-        const newMap = new Microsoft.Maps.Map(mapRef.current, {
-          center: new Microsoft.Maps.Location(0, 0),
-          zoom: 12,
-        });
-        setMap(newMap);
-      };
-    }
-  }, [map]);
-
-  return <div ref={mapRef} className="w-full h-screen" />;
+  return(
+     <div id="bingMap" className='w-full h-screen'></div>
+  )
 };
 
-export default Track;
-
-// ApL9gk0lzPyXzgDct5B1kxrlkJIpkGBvFRaDYE2gVL3LNehOicd0_367zCh8WZZk
+export default MapComponent;

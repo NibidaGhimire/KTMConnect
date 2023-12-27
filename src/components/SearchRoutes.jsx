@@ -29,6 +29,19 @@ const SearchRoutes = () => {
             </button>
           </Link>
         </div>
+
+
+        <div className='w-fit red-blue-gradient p-[1px] rounded-[20px] shadow-card  '>
+          <Link
+            key="searchshubhakamana"
+            to="/searchroutes/subhakamanaroutes"
+          >
+            <button
+              className='bg-tertiary rounded-[20px] py-5 px-12 min-h-[280px] min-w-[280px] flex justify-evenly items-center flex-col text-[24px] font-semibold hover:bg-black-100'>
+              Subhakamana Yatayat
+            </button>
+          </Link>
+        </div>
       </div>
     </div>
   )

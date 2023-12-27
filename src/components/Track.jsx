@@ -85,7 +85,7 @@ const Track = () => {
         });
 
         map.entities.push(userPin);
-        map.setView({ center: userLocation, zoom: 16 });
+        map.setView({ center: userLocation, zoom: 18 });
 
         renderMarkers();
       });

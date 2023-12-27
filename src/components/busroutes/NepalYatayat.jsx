@@ -14,7 +14,7 @@ const NepalYR = ({ index, main, sub }) => {
       </button>
       <div
         className={`${!toggle ? "hidden" : "flex"} w-full justify-center flex-wrap p-4 bg-black-100 absolute mx-0 my-2 min-w-[140px] z-10 rounded-xl`} >
-        <div className='flex flex-col  items-start gap-5 cursor-pointer'>
+        <div className='flex flex-col flex-wrap  items-start gap-5 cursor-pointer'>
           {sub.map((title, index) => (
             <div key={index}
             >

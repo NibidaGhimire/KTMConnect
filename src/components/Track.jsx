@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -5,30 +6,39 @@ const Track = () => {
   const [map, setMap] = useState(null);
 
   useEffect(() => {
+
     const fetchFakeBusLocation = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/fake-bus-location'); 
-        const { latitude, longitude } = response.data;
-        updateMap(parseFloat(latitude), parseFloat(longitude));
+        const response = await axios.get('http://localhost:3000/fake-bus-location');
+        if (response && response.data) {
+          const { latitude, longitude } = response.data;
+          updateMap(parseFloat(latitude), parseFloat(longitude));
+        } else {
+          console.error('Invalid response from server:', response);
+        }
       } catch (error) {
-        console.error('Error fetching fake bus location:', error);
+        console.error('Error fetching fake bus location:', error.response ? error.response.data : error.message);
       }
     };
-
+    
     const updateMap = (latitude, longitude) => {
       if (!map) return;
-      const newLocation = { lat: latitude, lng: longitude };
 
-      new window.google.maps.Marker({
-        position: newLocation,
-        map: map,
+      const newLocation = new Microsoft.Maps.Location(latitude, longitude);
+
+      const pin = new Microsoft.Maps.Pushpin(newLocation, {
         title: 'Bus Location',
       });
 
-      map.setCenter(newLocation);
+      if (map.entities.getLength() > 0) {
+        map.entities.clear();
+      }
+
+      map.entities.push(pin);
+      map.setView({ center: newLocation, zoom: 12 });
     };
 
-    const interval = setInterval(fetchFakeBusLocation, 5000); 
+    const interval = setInterval(fetchFakeBusLocation, 5000);
 
     return () => clearInterval(interval);
   }, [map]);
@@ -37,21 +47,25 @@ const Track = () => {
 
   useEffect(() => {
     if (!map) {
-      const googleMapScript = document.createElement('script');
-      googleMapScript.src = `https://maps.googleapis.com/maps/api/js?key=`;
-      window.document.body.appendChild(googleMapScript);
-
-      googleMapScript.addEventListener('load', () => {
-        const newMap = new window.google.maps.Map(mapRef.current, {
-          center: { lat: 0, lng: 0 }, 
+      const bingMapScript = document.createElement('script');
+      bingMapScript.src = 'https://www.bing.com/api/maps/mapcontrol?key=ApL9gk0lzPyXzgDct5B1kxrlkJIpkGBvFRaDYE2gVL3LNehOicd0_367zCh8WZZk&callback=initMap';
+      window.document.body.appendChild(bingMapScript);
+      window.initMap = () => {
+        const newMap = new Microsoft.Maps.Map(mapRef.current, {
+          center: new Microsoft.Maps.Location(0, 0),
           zoom: 12,
         });
         setMap(newMap);
-      });
+      };
     }
   }, [map]);
 
-  return <div ref={mapRef} style={{ width: '100%', height: '500px' }} />;
+  return (
+    <div ref={mapRef} className='w-full h-screen' />
+  )
 };
 
 export default Track;
+
+
+// ApL9gk0lzPyXzgDct5B1kxrlkJIpkGBvFRaDYE2gVL3LNehOicd0_367zCh8WZZk

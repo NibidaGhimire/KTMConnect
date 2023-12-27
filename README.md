@@ -7,11 +7,17 @@
 
 ## Tech stacks used?
 -> **ReactJs** for frontend.
+
 -> **Bing Maps API** for the integrating maps and locating buses within the website.
+
 -> **Axios** for fetching the api.
+
 -> **Tailwind (postcss, autoprefixer) and framer-motion** to make the UI better.
+
 -> **react-router-dom** for Routing through various pages.
+
 -> **express and faker** used to generate random location coordinates.
+
 -> **emailjs** for mailing services through the website.
 
 ## Future Enhancements?

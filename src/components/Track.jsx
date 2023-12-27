@@ -1,60 +1,18 @@
-// // // ApL9gk0lzPyXzgDct5B1kxrlkJIpkGBvFRaDYE2gVL3LNehOicd0_367zCh8WZZk
+// // ApL9gk0lzPyXzgDct5B1kxrlkJIpkGBvFRaDYE2gVL3LNehOicd0_367zCh8WZZk
 
+import React, { useEffect, useState } from 'react';
 
-// import React, { useEffect } from 'react';
+const Track = () => {
+  const [map, setMap] = useState(null);
+  const [markers, setMarkers] = useState([
+    { name: 'Sajha 1', latitude: 27.6796000, longitude: 85.3204300, mapObject: null },
+    { name: 'Nepal Yatayat 1', latitude: 27.686382, longitude: 85.315399, mapObject: null },
+    { name: 'Sajha 2', latitude: 	27.685245, longitude: 85.323919, mapObject: null },
+    { name: 'Subhakamana 1', latitude: 27.676737, longitude: 85.316991, mapObject: null },
+    { name: 'Nepal Yatayat 2', latitude: 27.681797, longitude: 85.319781, mapObject: null },
 
-// const MapComponent = () => {
-//   useEffect(() => {
-//     const loadMap = () => {
-//       const script = document.createElement('script');
-//       script.type = 'text/javascript';
-//       script.async = true;
-//       script.defer = true;
-//       script.src = `https://www.bing.com/api/maps/mapcontrol?key=ApL9gk0lzPyXzgDct5B1kxrlkJIpkGBvFRaDYE2gVL3LNehOicd0_367zCh8WZZk&callback=initMap`;
-//       document.body.appendChild(script);
-//     };
+  ]);
 
-
-//     window.initMap = () => {
-//       const map = new window.Microsoft.Maps.Map(document.getElementById('bingMap'), {
-//         credentials: "ApL9gk0lzPyXzgDct5B1kxrlkJIpkGBvFRaDYE2gVL3LNehOicd0_367zCh8WZZk",
-//       });
-
-//       if (navigator.geolocation) {
-//         navigator.geolocation.getCurrentPosition(showPosition);
-//       } else {
-//         alert('Geolocation is not supported by this browser.');
-//       }
-
-//       function showPosition(position) {
-//         const latitude = position.coords.latitude;
-//         const longitude = position.coords.longitude;
-
-//         const location = new window.Microsoft.Maps.Location(latitude, longitude);
-//         map.setView({ center: location, zoom: 20 });
-
-//         const pin = new window.Microsoft.Maps.Pushpin(location,{
-//           title: "bus",
-//         });
-//         map.entities.push(pin);
-//       }
-//     };
-
-//     loadMap();
-//   }, []);
-
-//   return(
-//      <div id="bingMap" className='w-full h-screen'></div>
-//   )
-// };
-
-// export default MapComponent;
-
-
-
-import React, { useEffect } from 'react';
-
-const MapComponent = () => {
   useEffect(() => {
     const script = document.createElement('script');
     script.type = 'text/javascript';
@@ -143,6 +101,4 @@ const MapComponent = () => {
   return <div id="bingMap" className="w-full h-screen"></div>;
 };
 
-export default MapComponent;
-
-//test
+export default Track;

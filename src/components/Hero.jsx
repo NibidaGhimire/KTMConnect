@@ -6,9 +6,8 @@ import { herobg } from "../assets/index";
 const Hero = () => {
   return (
     <>
-      <img src={herobg} className='absolute'/>
+      <img src={herobg} className='absolute h-auto'/>
       <div className='relative w-full h-screen mx-auto flex flex-col'>
-
 
         <div className={`${styles.paddingX} absolute inset-0 
               top-[120px] max-w-7xl mx-auto 

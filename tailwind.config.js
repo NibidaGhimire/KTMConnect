@@ -10,7 +10,7 @@ module.exports = {
         sec:"#bebebe",
         tertiary: "#1e1e1e",
         blue:"#00629b",
-        "black-100": "#100d25",
+        "black-100": "#000c18",
         "black-200": "#090325",
         "white-100": "#f3f3f3",
 

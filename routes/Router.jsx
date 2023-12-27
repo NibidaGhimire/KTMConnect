@@ -3,6 +3,8 @@ import SearchRoutes from '../src/components/SearchRoutes'
 import Track from '../src/components/Track'
 import Sajha from '../src/components/busroutes/Sajha'
 import NepalYatayat from '../src/components/busroutes/NepalYatayat'
+import SubhakamanaYatayat from '../src/components/busroutes/SubhakamanaYatayat'
+
 import { Route, Routes } from 'react-router-dom'
 
 // Routing to different pages
@@ -16,6 +18,8 @@ const Router = () => {
         <Route path="/searchroutes" element={<SearchRoutes />} />
         <Route path="/searchroutes/sajharoutes" element={<Sajha />} />
         <Route path="/searchroutes/nepalyatayatroutes" element={<NepalYatayat />} />
+        <Route path="/searchroutes/subhakamanaroutes" element={<SubhakamanaYatayat />} />
+
       </Routes>
     </div>
   )

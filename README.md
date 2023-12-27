@@ -15,7 +15,7 @@ Visit the live site: [KTMConnect](https://ktmconnect.vercel.app/)
 - **react-router-dom**: Facilitating smooth navigation across different pages of the webapp.
 - **Express and Faker**: Generating random location coordinates during the development phase.
 - **emailjs**: Enabling hassle-free mailing services directly from the website.
-
+- **gpstracker.apk**: to get gps coordinates in real time after gps implementation.
 
 ## Future Enhancements?
 > This site is currently its development phase. The random locations fetched will be soon replaced with the real time location of buses through GPS technology. Users will be able to search their desired bus service and estimate the arrival times. Using cameras and Machine Learning, we may be able to get the available seats services to the website.

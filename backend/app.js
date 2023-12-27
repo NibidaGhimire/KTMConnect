@@ -30,7 +30,7 @@ app.get("/fake-bus-location", (req, res) => {
   res.json(busLocation);
 });
 
-const PORT = process.env.PORT || 3001; // Update the port to 3001 to match your React app
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

@@ -4,8 +4,8 @@ import Track from "../src/components/Track";
 import Sajha from "../src/components/busroutes/Sajha";
 import NepalYatayat from "../src/components/busroutes/NepalYatayat";
 import { Route, Routes } from "react-router-dom";
+import SubhakamanaYatayat from "../src/components/busroutes/SubhakamanaYatayat";
 
-// Routing to different pages
 const Router = () => {
   return (
     <div>
@@ -18,6 +18,10 @@ const Router = () => {
         <Route
           path="/searchroutes/nepalyatayatroutes"
           element={<NepalYatayat />}
+        />
+        <Route
+          path="/searchroutes/subhakamanaroutes"
+          element={<SubhakamanaYatayat />}
         />
       </Routes>
     </div>

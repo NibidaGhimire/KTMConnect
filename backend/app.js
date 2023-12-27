@@ -1,38 +1,36 @@
-// const express = require('express');
-// const faker = require('faker/locale/en');
-// const cors = require('cors'); 
+// const express = require("express");
+// const faker = require("faker/locale/en");
+
 // const app = express();
 
-// app.use(cors());
+// app.get("/fake-bus-location", (req, res) => {
+//   const latitude = faker.address.latitude();
+//   const longitude = faker.address.longitude();
 
-// app.get('/fake-bus-location', (req, res) => {
-//     const latitude = parseFloat(faker.address.latitude());
-//     const longitude = parseFloat(faker.address.longitude());
-    
-//     res.json({ latitude, longitude });
+//   res.json({ latitude, longitude });
 // });
 
 // const PORT = process.env.PORT || 3000;
 // app.listen(PORT, () => {
-//     console.log(`Server running on port ${PORT}`);
+//   console.log(`Server running on port ${PORT}`);
 // });
 
+//samriddhi //doesn't change anything
+const express = require("express");
+const faker = require("faker/locale/en");
 
-
-const express = require('express');
-const cors = require('cors'); 
 const app = express();
 
-app.use(cors());
+app.get("/fake-bus-location", (req, res) => {
+  const busLocation = {
+    latitude: faker.address.latitude(),
+    longitude: faker.address.longitude(),
+  };
 
-app.post('/send-location', (req, res) => {
-    const { latitude, longitude } = req.body;
-    console.log('Received location:', { latitude, longitude });
-    // Process the received location data as needed
-    res.status(200).send('Location received successfully');
+  res.json(busLocation);
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001; // Update the port to 3001 to match your React app
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
